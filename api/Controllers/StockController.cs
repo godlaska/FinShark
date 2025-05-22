@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using api.Data;
+using api.Models;
+using api.DTOs;
+using api.Mappers;
 
 namespace api.Controllers
 {
@@ -22,7 +25,9 @@ namespace api.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var stocks = _context.Stocks.ToList();
+            var stocks = _context.Stocks.ToList()
+            .Select(s => s.ToStockDto());
+
             return Ok(stocks);
         }
 
@@ -37,7 +42,7 @@ namespace api.Controllers
             }
 
             // Return the stock
-            return Ok(stock);
+            return Ok(stock.ToStockDto());
         }
     }
 }
