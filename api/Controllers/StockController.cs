@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using api.Data;
 using api.Models;
 using api.DTOs;
+using api.DTOs.Stock;
 using api.Mappers;
 
 namespace api.Controllers
@@ -43,6 +44,19 @@ namespace api.Controllers
 
             // Return the stock
             return Ok(stock.ToStockDto());
+        }
+
+        [HttpPost]
+        public IActionResult Create([FromBody] CreateStockRequestDto stockDto)
+        {
+            // Create stock model from DTO
+            var stockModel = stockDto.ToStockFromCreateDTO();
+            // Add the stock model to the database
+            _context.Stocks.Add(stockModel);
+            _context.SaveChanges();
+
+            // Return the created stock
+            return CreatedAtAction(nameof(GetById), new { id = stockModel.Id }, stockModel.ToStockDto());
         }
     }
 }
