@@ -71,19 +71,36 @@ namespace api.Controllers
             }
 
             // Update the stock model with the new values
-            // Equivalent to:
-            // stockModel.Symbol = updateDto.Symbol;
-            // stockModel.CompanyName = updateDto.CompanyName;
-            // stockModel.Purchase = updateDto.Purchase;
-            // stockModel.LastDiv = updateDto.LastDiv;
-            // stockModel.Industry = updateDto.Industry;
-            // stockModel.MarketCap = updateDto.MarketCap;
-            _context.Entry(entity).CurrentValues.SetValues(dto);
+            stockModel.Symbol = updateDto.Symbol;
+            stockModel.CompanyName = updateDto.CompanyName;
+            stockModel.Purchase = updateDto.Purchase;
+            stockModel.LastDiv = updateDto.LastDiv;
+            stockModel.Industry = updateDto.Industry;
+            stockModel.MarketCap = updateDto.MarketCap;
 
             _context.SaveChanges();
 
             // Return the updated stock
             return Ok(stockModel.ToStockDto());
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public IActionResult Delete ([FromRoute] int id)
+        {
+            var stockModel = _context.Stocks.FirstOrDefault(s => s.Id == id);
+
+            if (stockModel == null)
+            {
+                return NotFound();
+            }
+
+            // Remove the stock model from the database
+            _context.Stocks.Remove(stockModel);
+            _context.SaveChanges();
+
+            // Return a 204 No Content response
+            return NoContent();
         }
     }
 }
