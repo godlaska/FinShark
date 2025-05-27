@@ -1,17 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using api.Data;
-using api.Models;
-using api.DTOs;
 using api.DTOs.Stock;
 using api.Mappers;
 using api.Interfaces;
-using api.Repository;
 
 namespace api.Controllers
 {
