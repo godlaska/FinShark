@@ -47,7 +47,6 @@ namespace api.Controllers
                 })
                 .ToList();
 
-            // Optionally map to a DTO if you have one, e.g.:
             var ratingsDto = averageRatings.Select(ar => new
             {
                 StockId = ar.StockId,

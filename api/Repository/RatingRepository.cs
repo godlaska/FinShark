@@ -14,7 +14,9 @@ namespace api.Repository
         }
         public async Task<Rating> CreateAsync(Rating rating)
         {
-            throw new NotImplementedException();
+            await _context.Ratings.AddAsync(rating);
+            await _context.SaveChangesAsync();
+            return rating;
         }
 
         public Task<Rating?> DeleteAsync(int id)
