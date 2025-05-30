@@ -85,6 +85,20 @@ namespace api.Controllers
 
             return CreatedAtAction(nameof(GetById), new { id = ratingModel.Id }, ratingModel.ToRatingDto());
         }
-    }
-    
+
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdatingRatingRequestDto updateDto)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var rating = await _ratingRepo.GetByIdAsync(id);
+
+            if (rating == null)
+            {
+                return NotFound($"Rating with ID {id} not found.");
+            }
+
+            return Ok(rating.ToRatingDto());
+        }
+    } 
 }
