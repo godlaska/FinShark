@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api.Data;
 
@@ -11,9 +12,11 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250529194424_FixRatingType")]
+    partial class FixRatingType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,13 @@ namespace api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7d3afde9-5b9f-4a38-a001-6cd80cc9a597",
+                            Id = "83e15e91-9832-43f1-996b-b4fd00e92dd1",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "4d833b11-4c0a-44f1-b2f1-3210d447cb07",
+                            Id = "0e86b8de-efc8-41f5-9ecf-ce11d0fab2e2",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -291,9 +294,6 @@ namespace api.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("StockId")
-                        .HasColumnType("int");
 
                     b.Property<decimal>("StockRating")
                         .HasColumnType("decimal(3, 2)");

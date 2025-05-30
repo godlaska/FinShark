@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api.Data;
 
@@ -11,9 +12,11 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250529192846_CreateRatingsTable")]
+    partial class CreateRatingsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,13 @@ namespace api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7d3afde9-5b9f-4a38-a001-6cd80cc9a597",
+                            Id = "eb5f1a17-dc30-4948-bed7-7d7983c7ad53",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "4d833b11-4c0a-44f1-b2f1-3210d447cb07",
+                            Id = "c444c1dc-6c8f-46ef-bb58-bf83202567c5",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -282,25 +285,6 @@ namespace api.Migrations
                     b.HasIndex("StockId");
 
                     b.ToTable("Portfolios");
-                });
-
-            modelBuilder.Entity("api.Models.Rating", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("StockId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("StockRating")
-                        .HasColumnType("decimal(3, 2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Ratings");
                 });
 
             modelBuilder.Entity("api.Models.Stock", b =>
